@@ -13,7 +13,7 @@ describe ('Login page', ()=>{
    })
 
      //invalid login with incorrect username
-  it.skip ('Invalid login with incorrect username',()=>{
+  it('Invalid login with incorrect username',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("Tester");
       cy.get('#password').clear().type("secret_sauce");
@@ -22,7 +22,7 @@ describe ('Login page', ()=>{
   })
 
       // Invalid login with incorrect username and password
-  it.skip ('Invalid username and paswword',()=>{
+  it('Invalid username and paswword',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("Tester");
       cy.get('#password').clear().type("TESTEETR");
@@ -31,7 +31,7 @@ describe ('Login page', ()=>{
   })
 
       // Login with locked_out_user
-  it.skip ('Login with locked_out_user',()=>{
+  it('Login with locked_out_user',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("locked_out_user");
       cy.get('#password').clear().type("secret_sauce");
@@ -39,7 +39,7 @@ describe ('Login page', ()=>{
  })
 
        // Login with problem_user
-  it.skip ('Login with locked_out_user',()=>{
+  it('Login with locked_out_user',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("problem_user");
       cy.get('#password').clear().type("secret_sauce");
@@ -47,7 +47,7 @@ describe ('Login page', ()=>{
   })
 
       // Login with performance_glitch_user
-  it.skip ('Login with locked_out_user',()=>{
+  it('Login with locked_out_user',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("performance_glitch_user");
       cy.get('#password').clear().type("secret_sauce");
@@ -55,7 +55,7 @@ describe ('Login page', ()=>{
 })   
 
       // Login with error_user
-  it.skip ('Login with locked_out_user',()=>{
+  it('Login with locked_out_user',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("error_user");
       cy.get('#password').clear().type("secret_sauce");
@@ -63,14 +63,14 @@ describe ('Login page', ()=>{
   })
 
       // Login with error_user
-  it.skip ('Login with locked_out_user',()=>{
+  it('Login with locked_out_user',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("visual_user");
       cy.get('#password').clear().type("secret_sauce");
       cy.get('#login-button').click();
   })
       // Valid login with standard user
-  it('Valid login with standard user with valid password',()=>{
+  it.only('Valid login with standard user with valid password',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.url().should('eq', 'https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("standard_user");
