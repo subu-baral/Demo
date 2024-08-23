@@ -1,77 +1,98 @@
 describe ('Login page', ()=>{
-  it.skip('login page should be visible', ()=>{
+   
+    beforeEach(() => {
 
-      // visit the swag lab page
+        // visit the swag lab page
       cy.visit('https://www.saucedemo.com/');
       cy.url().should('eq', 'https://www.saucedemo.com/');
-      cy.contains('Swag Labs');
+      cy.get('.login_logo').should('have.text', 'Swag Labs');
 
-      // placeholders should be visible and clickable
+        // placeholders should be visible and clickable
       cy.get('input[name="user-name"]').should('have.attr', 'placeholder', 'Username').click();
       cy.get('input[name="password"]').should('have.attr', 'placeholder', 'Password').click();
       cy.get('input[name="login-button"]').should('have.value', 'Login').click();
-   })
+        
+      });
 
-     //invalid login with incorrect username
-  it('Invalid login with incorrect username',()=>{
+      //invalid login with incorrect username
+    it('Invalid login with incorrect username',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("Tester");
       cy.get('#password').clear().type("secret_sauce");
       cy.get('#login-button').click();
       cy.get('h3').should('have.text','Epic sadface: Username and password do not match any user in this service');
-  })
+    })
 
       // Invalid login with incorrect username and password
-  it('Invalid username and paswword',()=>{
+    it('Invalid username and paswword',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("Tester");
       cy.get('#password').clear().type("TESTEETR");
       cy.get('#login-button').click();
       cy.get('h3').should('have.text','Epic sadface: Username and password do not match any user in this service');
-  })
+    })
 
-      // Login with locked_out_user
-  it('Login with locked_out_user',()=>{
+       // Login with locked_out_user
+    it('Login with locked_out_user',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("locked_out_user");
       cy.get('#password').clear().type("secret_sauce");
       cy.get('#login-button').click();
- })
+    })
 
        // Login with problem_user
-  it('Login with locked_out_user',()=>{
+    it('Login with locked_out_user',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("problem_user");
       cy.get('#password').clear().type("secret_sauce");
       cy.get('#login-button').click();
-  })
+    })
 
       // Login with performance_glitch_user
-  it('Login with locked_out_user',()=>{
+    it('Login with locked_out_user',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("performance_glitch_user");
       cy.get('#password').clear().type("secret_sauce");
       cy.get('#login-button').click();
-})   
+    })   
 
       // Login with error_user
-  it('Login with locked_out_user',()=>{
+    it('Login with locked_out_user',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("error_user");
       cy.get('#password').clear().type("secret_sauce");
       cy.get('#login-button').click();
-  })
+    })
 
       // Login with error_user
-  it('Login with locked_out_user',()=>{
+    it('Login with locked_out_user',()=>{
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("visual_user");
       cy.get('#password').clear().type("secret_sauce");
       cy.get('#login-button').click();
-  })
-      // Valid login with standard user
-  it.only('Valid login with standard user with valid password',()=>{
-      cy.visit('https://www.saucedemo.com/');
+    })
+      // login with standard user
+    it.only('Valid login with standard user with valid password',()=>{
+
+        // empty user and password
+      cy.url().should('eq', 'https://www.saucedemo.com/');
+      cy.get('#user-name').clear();
+      cy.get('#password').clear();
+      cy.get('#login-button').click();
+      cy.get('h3').should('have.text', 'Epic sadface: Username is required');
+      cy.get('button[data-test="error-button"]').should('be.visible')
+      .click();
+      
+
+      //valid username and incorrect password
+      cy.url().should('eq', 'https://www.saucedemo.com/');
+      cy.get('#user-name').clear().type("standard_user");
+      cy.get('#password').clear().type("ahjdcxcsd");
+      cy.get('#login-button').click();
+      cy.get('h3').should('have.text', 'Epic sadface: Username and password do not match any user in this service');
+
+
+      
       cy.url().should('eq', 'https://www.saucedemo.com/');
       cy.get('#user-name').clear().type("standard_user");
       cy.get('#password').clear().type("secret_sauce");
