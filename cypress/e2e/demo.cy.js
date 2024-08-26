@@ -1,4 +1,5 @@
 import{demoSelectors}from "../support/selectors/demoSelectors"
+import { addToCartSelectors } from "../support/selectors/addToCartSelectors";
 describe ('Login page', ()=>{
   it.skip('login page should be visible', ()=>{
 
@@ -89,16 +90,16 @@ describe ('Login page', ()=>{
       
       //Items should be visible
       cy.get(demoSelectors.productNameSelector).eq(0).should('contain', 'Sauce Labs Backpack'); 
-      cy.get(demoSelectors.ProductImageSelector).should('be.visible');
+      cy.get(addToCartSelectors.backpackSelector).should('be.visible');
       cy.get(demoSelectors.productDescribeSelector).should('contain', 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
       cy.get(demoSelectors.productPriceSelector).should('contain', '$29.99');
-      cy.get(demoSelectors.addToCartSelector).should('be.visible');
+      cy.get(demoSelectors.addtoCartBackpack).should('be.visible');
 
       cy.get(demoSelectors.productNameSelector).eq(3).should('have.text','Sauce Labs Fleece Jacket');
-      cy.get(demoSelectors.ProductImageSelector).should('be.visible');
+      cy.get(addToCartSelectors.fleeceJacketSelector).should('be.visible');
       cy.get(demoSelectors.productDescribeSelector).should('contain',"It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office");
       cy.get(demoSelectors.productPriceSelector).should('contain','$49.99');
-      cy.get(demoSelectors.addToCartSelector).should('be.visible');
+      cy.get(demoSelectors.addtoCartFleeceJacket ).should('be.visible');
 
       //scroll down
       cy.scrollTo('bottom');
@@ -106,10 +107,9 @@ describe ('Login page', ()=>{
       
       // Logout
       cy.get(demoSelectors.burgerMenuSelector).should('be.visible')
-      .and('be.enabled')
       .click();
       
-      cy.get(demoSelectors.logOutSelector).should('be.visible')
+      cy.get(demoSelectors.logOutSelector)
       .and('have.text','Logout')
       .and('have.attr', 'href', '#')
       .click();

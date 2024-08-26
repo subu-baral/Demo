@@ -1,48 +1,73 @@
+import{demoSelectors}from "../support/selectors/demoSelectors"
+import { addToCartSelectors } from "../support/selectors/addToCartSelectors";
+
 describe('Product page', () => {
   it('product page should be visible', () => {
     cy.visit('https://www.saucedemo.com/');
     cy.contains('Swag Labs');
-    cy.get('#user-name').clear().type("standard_user");
-    cy.get('#password').clear().type("secret_sauce");
-    cy.get('#login-button').click();
+    cy.get(demoSelectors.userNameSelector).clear().type("standard_user");
+    cy.get(demoSelectors.passwordSelector).clear().type("secret_sauce");
+    cy.get(demoSelectors.loginButtonSelector).click();
     cy.url().should('include','/inventory.html');
 
-    cy.get('#shopping_cart_container').should('be.visible');
+    cy.get(demoSelectors.addToCartSelector).should('be.visible');
+    cy.get(addToCartSelectors.backpackSelector).should('be.visible');
 
-    cy.get('div[data-test="inventory-item-name"]').eq(0).should('have.text', 'Sauce Labs Backpack'); 
-    cy.get('#item_4_title_link').should('be.visible');
-    cy.get('div[data-test="inventory-item-desc"]').should('contain', 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
-    cy.get('div[data-test="inventory-item-price"]').should('contain', '$29.99');
-    cy.get('#add-to-cart-sauce-labs-backpack').should('be.visible');
-    cy.get('#add-to-cart-sauce-labs-backpack').click();
+    cy.get(demoSelectors.productNameSelector).eq(0).should('have.text', 'Sauce Labs Backpack')
+    .click(); 
+    cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=4');
 
-    cy.get('div[data-test="inventory-item-name"]').eq(1).should('have.text', 'Sauce Labs Bike Light'); 
-    cy.get('#item_0_img_link').should('be.visible');
-    cy.get('div[data-test="inventory-item-desc"]').should('contain', "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.");
-    cy.get('div[data-test="inventory-item-price"]').should('contain', '$9.99');
-    cy.get('#add-to-cart-sauce-labs-bike-light').click();
+    cy.get(demoSelectors.productDescribeSelector).should('contain', 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
+    cy.get(demoSelectors.productPriceSelector).should('contain', '$29.99');
+    cy.get(addToCartSelectors.addToCartButton).should('be.visible')
+    .click();
+    cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
+    cy.url().should('include','/inventory.html');
 
-    cy.get('div[data-test="inventory-item-name"]').eq(2).should('have.text', 'Sauce Labs Bolt T-Shirt'); 
-    cy.get('#item_3_title_link').should('be.visible');
-    cy.get('div[data-test="inventory-item-desc"]').should('contain', 'This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a few tests. Super-soft and comfy ringspun combed cotton.');
-    cy.get('div[data-test="inventory-item-price"]').should('contain', '$15.99');
-    cy.get('#add-to-cart-sauce-labs-bolt-t-shirt').click();
+    cy.get(addToCartSelectors.bikeLightSelector).should('be.visible');
+    cy.get(demoSelectors.productNameSelector).eq(1).should('have.text', 'Sauce Labs Bike Light')
+    .click(); 
+    
+    cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=0');
+    cy.get(demoSelectors.productDescribeSelector).should('contain', "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.");
+    cy.get(demoSelectors.productPriceSelector).should('contain', '$9.99');
+    cy.get(addToCartSelectors.addToCartButton).should('be.visible')
+    .click();
+    cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
+    cy.url().should('include','/inventory.html');
 
-    cy.get('div[data-test="inventory-item-name"]').eq(3).should('have.text','Sauce Labs Fleece Jacket');
-    cy.get('#item_5_title_link').should('be.visible');
-    cy.get('div[data-test="inventory-item-desc"]').should('contain',"It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office");
-    cy.get('div[data-test="inventory-item-price"]').should('contain','$49.99');
-    cy.get('#add-to-cart-sauce-labs-fleece-jacket').click();
+    cy.get(addToCartSelectors.boltTshirtSelector).should('be.visible');
+    cy.get(demoSelectors.productNameSelector).eq(2).should('have.text', 'Sauce Labs Bolt T-Shirt')
+    .click(); 
+ 
+    cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=1');
+    cy.get(demoSelectors.productDescribeSelector).should('contain', 'Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt.');
+    cy.get(demoSelectors.productPriceSelector).should('contain', '$15.99');
+    cy.get(addToCartSelectors.addToCartButton).should('be.visible')
+    .click();
+    cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
+    cy.url().should('include','/inventory.html');
 
-    cy.get('span.shopping_cart_badge[data-test="shopping-cart-badge"]').should('be.visible').and('contain', '4');
-    cy.get('#shopping_cart_container').should('be.visible').click();
-    cy.url().should('include','https://www.saucedemo.com/cart.html');
+    cy.get(addToCartSelectors.fleeceJacketSelector).should('be.visible');
+    cy.get(demoSelectors.productNameSelector).eq(3).should('have.text','Sauce Labs Fleece Jacket')
+    .click();
+    cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=5');
+    cy.get(demoSelectors.productDescribeSelector).should('contain',"It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office");
+    cy.get(demoSelectors.productPriceSelector).should('contain','$49.99');
+    cy.get(addToCartSelectors.addToCartButton).should('be.visible')
+    .click();
+    cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
+    cy.url().should('include','/inventory.html');
+
+    cy.get('span[data-test="shopping-cart-badge"]').should('be.visible').and('contain', '4');
+    cy.get(demoSelectors.addToCartSelector).click();
+    cy.url().should('include','/cart.html');
     cy.get('.title').should('have.text', 'Your Cart');
     cy.get('div[data-test="cart-quantity-label"]').should('have.text', 'QTY'); 
     cy.get('div[data-test="cart-desc-label"]').should('have.text', 'Description');
 
-    cy.get('div[data-test="inventory-item-name"]').eq(0).should('contain', 'Sauce Labs Backpack'); 
-    cy.get('div[data-test="inventory-item-name"]').eq(2).should('contain', 'Sauce Labs Bolt T-Shirt'); 
+    cy.get(demoSelectors.productNameSelector).eq(0).should('contain', 'Sauce Labs Backpack'); 
+    cy.get(demoSelectors.productNameSelector).eq(2).should('contain', 'Sauce Labs Bolt T-Shirt'); 
 
     cy.get('#remove-sauce-labs-backpack').click();
     cy.get('#remove-sauce-labs-fleece-jacket').click();

@@ -23,9 +23,10 @@ export const demoSelectors = {
     ProductImageSelector : '#item_4_title_link',
     productDescribeSelector : 'div[data-test="inventory-item-desc"]',
     productPriceSelector : 'div[data-test="inventory-item-price"]',
-    addToCartSelector : '#add-to-cart-sauce-labs-backpack',
+    addtoCartBackpack : '#add-to-cart-sauce-labs-backpack',
+    addtoCartFleeceJacket : '#add-to-cart-sauce-labs-fleece-jacket' ,
 
     //logout Selector
-    logOutSelector : 'a#logout_sidebar_link'
+    logOutSelector : '#logout_sidebar_link'
 
 }
