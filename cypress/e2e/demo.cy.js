@@ -1,5 +1,6 @@
 import{demoSelectors}from "../support/selectors/demoSelectors"
 import { addToCartSelectors } from "../support/selectors/addToCartSelectors";
+import { dropdownOptionSelectors } from "../support/selectors/dropdownOptionSelectors";
 describe ('Login page', ()=>{
   it.skip('login page should be visible', ()=>{
 
@@ -20,7 +21,7 @@ describe ('Login page', ()=>{
       cy.get(demoSelectors.userNameSelector).clear().type("Tester");
       cy.get(demoSelectors.passwordSelector).clear().type("secret_sauce");
       cy.get(demoSelectors.loginButtonSelector).click();
-      cy.get('h3').should('have.text','Epic sadface: Username and password do not match any user in this service');
+      cy.get('h3').should('have.text',demoSelectors.errorMessageSelector);
   })
 
       // Invalid login with incorrect username and password
@@ -29,7 +30,7 @@ describe ('Login page', ()=>{
       cy.get(demoSelectors.userNameSelector).clear().type("Tester");
       cy.get(demoSelectors.passwordSelector).clear().type("TESTEETR");
       cy.get(demoSelectors.loginButtonSelector).click();
-      cy.get('h3').should('have.text','Epic sadface: Username and password do not match any user in this service');
+      cy.get('h3').should('have.text',demoSelectors.errorMessageSelector);
   })
 
       // Login with locked_out_user
@@ -89,16 +90,16 @@ describe ('Login page', ()=>{
       .and('be.visible');
       
       //Items should be visible
-      cy.get(demoSelectors.productNameSelector).eq(0).should('contain', 'Sauce Labs Backpack'); 
+      cy.get(demoSelectors.productNameSelector).eq(0).should('contain', dropdownOptionSelectors.backpackTextName); 
       cy.get(addToCartSelectors.backpackSelector).should('be.visible');
-      cy.get(demoSelectors.productDescribeSelector).should('contain', 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
-      cy.get(demoSelectors.productPriceSelector).should('contain', '$29.99');
+      cy.get(demoSelectors.productDescribeSelector).should('contain', dropdownOptionSelectors.backpackTextDescribe);
+      cy.get(demoSelectors.productPriceSelector).should('contain', dropdownOptionSelectors.backpackPrice);
       cy.get(demoSelectors.addtoCartBackpack).should('be.visible');
 
-      cy.get(demoSelectors.productNameSelector).eq(3).should('have.text','Sauce Labs Fleece Jacket');
+      cy.get(demoSelectors.productNameSelector).eq(3).should('have.text',dropdownOptionSelectors.fleeceJacketTextName);
       cy.get(addToCartSelectors.fleeceJacketSelector).should('be.visible');
-      cy.get(demoSelectors.productDescribeSelector).should('contain',"It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office");
-      cy.get(demoSelectors.productPriceSelector).should('contain','$49.99');
+      cy.get(demoSelectors.productDescribeSelector).should('contain',dropdownOptionSelectors.fleeceJacketTextDescribe);
+      cy.get(demoSelectors.productPriceSelector).should('contain',dropdownOptionSelectors.fleecejacketPrice);
       cy.get(demoSelectors.addtoCartFleeceJacket ).should('be.visible');
 
       //scroll down
@@ -111,8 +112,8 @@ describe ('Login page', ()=>{
       
       cy.get(demoSelectors.logOutSelector)
       .and('have.text','Logout')
-      .and('have.attr', 'href', '#')
-      .click();
+      .and('have.attr', 'href', '#');
+      
       cy.url().should('include','saucedemo.com'); 
   })
 })

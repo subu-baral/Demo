@@ -26,6 +26,8 @@ export const demoSelectors = {
     addtoCartBackpack : '#add-to-cart-sauce-labs-backpack',
     addtoCartFleeceJacket : '#add-to-cart-sauce-labs-fleece-jacket' ,
 
+    errorMessageSelector : 'Epic sadface: Username and password do not match any user in this service' ,
+
     //logout Selector
     logOutSelector : '#logout_sidebar_link'
 
