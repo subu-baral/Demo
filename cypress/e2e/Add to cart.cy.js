@@ -1,5 +1,6 @@
 import{demoSelectors}from "../support/selectors/demoSelectors"
 import { addToCartSelectors } from "../support/selectors/addToCartSelectors";
+import { dropdownOptionSelectors } from "../support/selectors/dropdownOptionSelectors";
 
 describe('Product page', () => {
   it('product page should be visible', () => {
@@ -13,129 +14,147 @@ describe('Product page', () => {
     cy.get(demoSelectors.addToCartSelector).should('be.visible');
     cy.get(addToCartSelectors.backpackSelector).should('be.visible');
 
-    cy.get(demoSelectors.productNameSelector).eq(0).should('have.text', 'Sauce Labs Backpack')
+    cy.get(demoSelectors.productNameSelector).eq(0).should('have.text', dropdownOptionSelectors.backpackTextName)
     .click(); 
     cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=4');
 
-    cy.get(demoSelectors.productDescribeSelector).should('contain', 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
-    cy.get(demoSelectors.productPriceSelector).should('contain', '$29.99');
+    cy.get(demoSelectors.productDescribeSelector).should('contain', dropdownOptionSelectors.backpackTextDescribe);
+    cy.get(demoSelectors.productPriceSelector).should('contain', dropdownOptionSelectors.backpackPrice);
     cy.get(addToCartSelectors.addToCartButton).should('be.visible')
     .click();
     cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
     cy.url().should('include','/inventory.html');
 
     cy.get(addToCartSelectors.bikeLightSelector).should('be.visible');
-    cy.get(demoSelectors.productNameSelector).eq(1).should('have.text', 'Sauce Labs Bike Light')
+    cy.get(demoSelectors.productNameSelector).eq(1).should('have.text', dropdownOptionSelectors.bikeLightTextName)
     .click(); 
     
     cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=0');
-    cy.get(demoSelectors.productDescribeSelector).should('contain', "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.");
-    cy.get(demoSelectors.productPriceSelector).should('contain', '$9.99');
+    cy.get(demoSelectors.productDescribeSelector).should('contain', dropdownOptionSelectors.bikeLightTextDescribe);
+    cy.get(demoSelectors.productPriceSelector).should('contain', dropdownOptionSelectors.bikeLightPrice);
     cy.get(addToCartSelectors.addToCartButton).should('be.visible')
     .click();
     cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
     cy.url().should('include','/inventory.html');
 
     cy.get(addToCartSelectors.boltTshirtSelector).should('be.visible');
-    cy.get(demoSelectors.productNameSelector).eq(2).should('have.text', 'Sauce Labs Bolt T-Shirt')
+    cy.get(demoSelectors.productNameSelector).eq(2).should('have.text', dropdownOptionSelectors.boltTshirtTextName)
     .click(); 
  
     cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=1');
-    cy.get(demoSelectors.productDescribeSelector).should('contain', 'Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt.');
-    cy.get(demoSelectors.productPriceSelector).should('contain', '$15.99');
+    cy.get(demoSelectors.productDescribeSelector).should('contain', dropdownOptionSelectors.boltTshirtTextDescribe);
+    cy.get(demoSelectors.productPriceSelector).should('contain', dropdownOptionSelectors.boltTshirtPrice);
     cy.get(addToCartSelectors.addToCartButton).should('be.visible')
     .click();
     cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
     cy.url().should('include','/inventory.html');
 
     cy.get(addToCartSelectors.fleeceJacketSelector).should('be.visible');
-    cy.get(demoSelectors.productNameSelector).eq(3).should('have.text','Sauce Labs Fleece Jacket')
+    cy.get(demoSelectors.productNameSelector).eq(3).should('have.text',dropdownOptionSelectors.fleeceJacketTextName)
     .click();
     cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=5');
-    cy.get(demoSelectors.productDescribeSelector).should('contain',"It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office");
-    cy.get(demoSelectors.productPriceSelector).should('contain','$49.99');
+    cy.get(demoSelectors.productDescribeSelector).should('contain',dropdownOptionSelectors.fleeceJacketTextDescribe);
+    cy.get(demoSelectors.productPriceSelector).should('contain',dropdownOptionSelectors.fleecejacketPrice);
     cy.get(addToCartSelectors.addToCartButton).should('be.visible')
     .click();
     cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
     cy.url().should('include','/inventory.html');
 
-    cy.get('span[data-test="shopping-cart-badge"]').should('be.visible').and('contain', '4');
+    cy.get(addToCartSelectors.shoppingCartBadge).should('be.visible').and('contain', '4');
     cy.get(demoSelectors.addToCartSelector).click();
     cy.url().should('include','/cart.html');
-    cy.get('.title').should('have.text', 'Your Cart');
-    cy.get('div[data-test="cart-quantity-label"]').should('have.text', 'QTY'); 
-    cy.get('div[data-test="cart-desc-label"]').should('have.text', 'Description');
+    cy.get(addToCartSelectors.yourCartText).should('have.text', 'Your Cart');
+    cy.get(addToCartSelectors.quantitySelector).should('have.text', 'QTY'); 
+    cy.get(addToCartSelectors.descriptionSelector).should('have.text', 'Description');
 
-    cy.get(demoSelectors.productNameSelector).eq(0).should('contain', 'Sauce Labs Backpack'); 
-    cy.get(demoSelectors.productNameSelector).eq(2).should('contain', 'Sauce Labs Bolt T-Shirt'); 
+    cy.get(demoSelectors.productNameSelector).eq(0).should('contain', dropdownOptionSelectors.backpackTextName); 
+    cy.get(demoSelectors.productNameSelector).eq(2).should('contain', dropdownOptionSelectors.boltTshirtTextName); 
 
-    cy.get('#remove-sauce-labs-backpack').click();
-    cy.get('#remove-sauce-labs-fleece-jacket').click();
+  
+    cy.get(demoSelectors.productNameSelector).eq(0).should('have.text', dropdownOptionSelectors.backpackTextName)
+    .click(); 
+    cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=4');
+    cy.get(addToCartSelectors.removeButton).should('be.visible')
+    .click();
+    cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
+    cy.url().should('include','/inventory.html'); 
+    cy.get(addToCartSelectors.shoppingCartBadge).should('be.visible').and('contain', '3');
+    cy.get(demoSelectors.addToCartSelector).click();
+    cy.url().should('include','https://www.saucedemo.com/cart.html');
 
-    cy.get('span.shopping_cart_badge[data-test="shopping-cart-badge"]').should('contain', '2');
+    cy.get(demoSelectors.productNameSelector).eq(2).should('have.text', dropdownOptionSelectors.fleeceJacketTextName)
+    .click();
+    cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=5');
+    cy.get(addToCartSelectors.removeButton).should('be.visible')
+    .click();
+    cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
+    cy.url().should('include','/inventory.html'); 
+    cy.get(addToCartSelectors.shoppingCartBadge).should('be.visible').and('contain', '2');
+    cy.get(demoSelectors.addToCartSelector).click();
+
 
     cy.scrollTo('bottom');
     cy.get('.footer').should('be.visible');
 
-    cy.get('#continue-shopping').click();
+    cy.get(addToCartSelectors.continueShoppingButton).click();
     cy.url().should('include','https://www.saucedemo.com/inventory.html');
-    cy.get('#shopping_cart_container').should('be.visible').click();
+    cy.get(demoSelectors.addToCartSelector).should('be.visible').click();
     cy.scrollTo('bottom');
     cy.get('.footer').should('be.visible');
 
-    cy.get('#checkout').click();
+    cy.get(addToCartSelectors.checkoutButton).click();
     cy.url().should('include','https://www.saucedemo.com/checkout-step-one.html');
-    cy.get('.title').should('have.text', 'Checkout: Your Information');
-    cy.get('input[name="firstName"]').should('have.attr', 'placeholder', 'First Name').click();
-    cy.get('input[name="lastName"]').should('have.attr', 'placeholder', 'Last Name').click();
-    cy.get('input[name="postalCode"]').should('have.attr', 'placeholder', 'Zip/Postal Code').click();
+    cy.get(addToCartSelectors.yourCartText).should('have.text', 'Checkout: Your Information');
+    cy.get(addToCartSelectors.firstNameSelector).should('have.attr', 'placeholder', 'First Name').click();
+    cy.get(addToCartSelectors.lastNameSelector).should('have.attr', 'placeholder', 'Last Name').click();
+    cy.get(addToCartSelectors.postalCodeSelector).should('have.attr', 'placeholder', 'Zip/Postal Code').click();
 
      //leave input field
-     cy.get('#first-name').clear();
-     cy.get('#last-name').clear();
-     cy.get('#postal-code').clear();
-     cy.get('#continue').click();
+     cy.get(addToCartSelectors.firstNameId).clear();
+     cy.get(addToCartSelectors.lastNameId).clear();
+     cy.get(addToCartSelectors.postalCodeId).clear();
+     cy.get(addToCartSelectors.continueButton).click();
      cy.get('div[class="error-message-container error"]').should('be.visible');
      cy.get('h3').should('have.text','Error: First Name is required');
 
      //Enter input field
-     cy.get('#first-name').clear().type('a');
-     cy.get('#last-name').clear().type('b');
-     cy.get('#postal-code').clear().type('c');
-     cy.get('#cancel').click();
+     cy.get(addToCartSelectors.firstNameId).clear().type('a');
+     cy.get(addToCartSelectors.lastNameId).clear().type('b');
+     cy.get(addToCartSelectors.postalCodeId).clear().type('c');
+     cy.get(addToCartSelectors.cancelButton).click();
 
      cy.url().should('include','https://www.saucedemo.com/cart.html');
      cy.scrollTo('bottom');
      cy.get('.footer').should('be.visible');
 
-     cy.get('#checkout').click();
+     cy.get(addToCartSelectors.checkoutButton).click();
      cy.url().should('include','https://www.saucedemo.com/checkout-step-one.html');
-     cy.get('#first-name').clear().type('Subhekshya');
-     cy.get('#last-name').clear().type('Baral');
-     cy.get('#postal-code').clear().type('12345');
+     cy.get(addToCartSelectors.firstNameId).clear().type('Subhekshya');
+     cy.get(addToCartSelectors.lastNameId).clear().type('Baral');
+     cy.get(addToCartSelectors.postalCodeId).clear().type('12345');
 
-     cy.get('#continue').click();
+     cy.get(addToCartSelectors.continueButton).click();
      cy.url().should('include','https://www.saucedemo.com/checkout-step-two.html');
      cy.get('.title').should('have.text', 'Checkout: Overview');
-     cy.get('div[data-test="inventory-item-name"]').eq(0).should('have.text', 'Sauce Labs Bike Light'); 
-     cy.get('div[data-test="inventory-item-name"]').eq(1).should('have.text', 'Sauce Labs Bolt T-Shirt'); 
+     cy.get(demoSelectors.productNameSelector).eq(0).should('have.text', dropdownOptionSelectors.bikeLightTextName); 
+     cy.get(demoSelectors.productNameSelector).eq(1).should('have.text', dropdownOptionSelectors.boltTshirtTextName); 
      cy.scrollTo('bottom');
      cy.get('.footer').should('be.visible');
-     cy.get('div[data-test="payment-info-label"]').should('have.text','Payment Information:');
-     cy.get('div[data-test="payment-info-value"]').should('have.text','SauceCard #31337');
-     cy.get('div[data-test="shipping-info-label"]').should('have.text','Shipping Information:');
-     cy.get('div[data-test="shipping-info-value"]').should('have.text','Free Pony Express Delivery!');
-     cy.get('div[data-test="total-info-label"]').should('have.text','Price Total');
-     cy.get('div[data-test="subtotal-label"]').should('have.text','Item total: $25.98');
-     cy.get('div[data-test="tax-label"]').should('have.text','Tax: $2.08');
-     cy.get('div[data-test="total-label"]').should('have.text','Total: $28.06');
+     cy.get(addToCartSelectors.paymentInfoLevelSelector).should('have.text','Payment Information:');
+     cy.get(addToCartSelectors.paymentInfoValueSelector).should('have.text','SauceCard #31337');
+     cy.get(addToCartSelectors.shippingInfoLevelSelector).should('have.text','Shipping Information:');
+     cy.get(addToCartSelectors.shippingInfoValueSelector).should('have.text','Free Pony Express Delivery!');
+     cy.get(addToCartSelectors.totalInfoLevelSelector).should('have.text','Price Total');
+     cy.get(addToCartSelectors.subtotalLevelSelector).should('have.text','Item total: $25.98');
+     cy.get(addToCartSelectors.taxlevelSelector).should('have.text','Tax: $2.08');
+     cy.get(addToCartSelectors.totalLabelSelector).should('have.text','Total: $28.06');
 
-     cy.get('#finish').click();
+     cy.get(addToCartSelectors.finishButton).click();
      cy.url().should('include','https://www.saucedemo.com/checkout-complete.html');
      cy.get('.title').should('have.text', 'Checkout: Complete!');
      cy.get('h2[data-test="complete-header"]').should('have.text','Thank you for your order!');
      cy.get('div[data-test="complete-text"]').should('have.text','Your order has been dispatched, and will arrive just as fast as the pony can get there!');
-     cy.get('#back-to-products').click();
+     cy.get(addToCartSelectors.backToProduct).click();
      cy.url().should('include','https://www.saucedemo.com/inventory.html');
 
   })
