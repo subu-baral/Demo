@@ -23,3 +23,15 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import{demoSelectors}from "../support/selectors/demoSelectors"
+Cypress.Commands.add('login', (username, password) => {
+    cy.visit('https://www.saucedemo.com/');
+    cy.url().should('eq', 'https://www.saucedemo.com/');
+    cy.contains('Swag Labs');
+    cy.get(demoSelectors.userNameSelector).clear().type("standard_user");
+    cy.get(demoSelectors.passwordSelector).clear().type("secret_sauce");
+    cy.get(demoSelectors.loginButtonSelector).click();
+    
+    cy.url().should('include','/inventory.html');
+    
+})

@@ -74,13 +74,14 @@ describe ('Login page', ()=>{
   })
       // Valid login with standard user
   it.only('Valid login with standard user with valid password',()=>{
-      cy.visit('https://www.saucedemo.com/');
-      cy.url().should('eq', 'https://www.saucedemo.com/');
-      cy.get(demoSelectors.userNameSelector).clear().type("standard_user");
-      cy.get(demoSelectors.passwordSelector).clear().type("secret_sauce");
-      cy.get(demoSelectors.loginButtonSelector).click();
+    cy.login('standard_user','secret_sauce');
+    //   cy.visit('https://www.saucedemo.com/');
+    //   cy.url().should('eq', 'https://www.saucedemo.com/');
+    //   cy.get(demoSelectors.userNameSelector).clear().type("standard_user");
+    //   cy.get(demoSelectors.passwordSelector).clear().type("secret_sauce");
+    //   cy.get(demoSelectors.loginButtonSelector).click();
 
-      cy.url().should('include','/inventory.html');
+      //cy.url().should('include','/inventory.html');
       cy.get(demoSelectors.burgerMenuSelector).should('be.visible')
       .and('be.enabled');
       cy.contains('Swag Labs');
@@ -110,9 +111,9 @@ describe ('Login page', ()=>{
       cy.get(demoSelectors.burgerMenuSelector).should('be.visible')
       .click();
       
-      cy.get(demoSelectors.logOutSelector)
-      .and('have.text','Logout')
+      cy.get(demoSelectors.logOutSelector).should('have.text','Logout')
       .and('have.attr', 'href', '#');
+     
       
       cy.url().should('include','saucedemo.com'); 
   })

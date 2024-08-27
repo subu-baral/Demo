@@ -4,12 +4,13 @@ import { dropdownOptionSelectors } from "../support/selectors/dropdownOptionSele
 
 describe('Product page', () => {
   it('product page should be visible', () => {
-    cy.visit('https://www.saucedemo.com/');
-    cy.contains('Swag Labs');
-    cy.get(demoSelectors.userNameSelector).clear().type("standard_user");
-    cy.get(demoSelectors.passwordSelector).clear().type("secret_sauce");
-    cy.get(demoSelectors.loginButtonSelector).click();
-    cy.url().should('include','/inventory.html');
+    cy.login('standard_user','secret_sauce');
+    // cy.visit('https://www.saucedemo.com/');
+    // cy.contains('Swag Labs');
+    // cy.get(demoSelectors.userNameSelector).clear().type("standard_user");
+    // cy.get(demoSelectors.passwordSelector).clear().type("secret_sauce");
+    // cy.get(demoSelectors.loginButtonSelector).click();
+    // cy.url().should('include','/inventory.html');
 
     cy.get(demoSelectors.addToCartSelector).should('be.visible');
     cy.get(addToCartSelectors.backpackSelector).should('be.visible');

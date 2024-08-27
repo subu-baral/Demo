@@ -2,13 +2,14 @@ import{demoSelectors}from "../support/selectors/demoSelectors"
 import { burgerButtonSelectors } from "../support/selectors/burgerButtonSelector";
 describe('Product page', () => {
   it('product page should be visible', () => {
-    cy.visit('https://www.saucedemo.com/');
-    cy.url().should('eq', 'https://www.saucedemo.com/');
-    cy.contains('Swag Labs');
-    cy.get(demoSelectors.userNameSelector).clear().type("standard_user");
-    cy.get(demoSelectors.passwordSelector).clear().type("secret_sauce");
-    cy.get(demoSelectors.loginButtonSelector).click();
-    cy.url().should('include','/inventory.html');
+    cy.login('standard_user','secret_sauce');
+    // cy.visit('https://www.saucedemo.com/');
+    // cy.url().should('eq', 'https://www.saucedemo.com/');
+    // cy.contains('Swag Labs');
+    // cy.get(demoSelectors.userNameSelector).clear().type("standard_user");
+    // cy.get(demoSelectors.passwordSelector).clear().type("secret_sauce");
+    // cy.get(demoSelectors.loginButtonSelector).click();
+    // cy.url().should('include','/inventory.html');
 
     cy.get(demoSelectors.burgerMenuSelector).should('be.visible').and('be.enabled').click();
    
