@@ -1,65 +1,89 @@
 import{demoSelectors}from "../support/selectors/demoSelectors"
 import { addToCartSelectors } from "../support/selectors/addToCartSelectors";
-import { dropdownOptionSelectors } from "../support/selectors/dropdownOptionSelectors";
+import { textMessage } from "../support/textMessage";
+
+function addtocart(selector,productName,index,name,url,productDescribe,text,productPrice,price,addtoCartButton,backToProduct,inventoryURL){
+  cy.get(selector).should('be.visible');
+  cy.get(productName).eq(index).should('have.text',name)
+  .click(); 
+  cy.url().should('include',url);
+
+  cy.get(productDescribe).should('contain', text);
+  cy.get(productPrice).should('contain', price);
+  cy.get(addtoCartButton).should('be.visible')
+  .click();
+  cy.get(backToProduct).should('be.visible').click();
+  cy.url().should('include', inventoryURL);
+}
 
 describe('Product page', () => {
   it('product page should be visible', () => {
     cy.login('standard_user','secret_sauce');
-    // cy.visit('https://www.saucedemo.com/');
-    // cy.contains('Swag Labs');
-    // cy.get(demoSelectors.userNameSelector).clear().type("standard_user");
-    // cy.get(demoSelectors.passwordSelector).clear().type("secret_sauce");
-    // cy.get(demoSelectors.loginButtonSelector).click();
-    // cy.url().should('include','/inventory.html');
-
+   
     cy.get(demoSelectors.addToCartSelector).should('be.visible');
-    cy.get(addToCartSelectors.backpackSelector).should('be.visible');
 
-    cy.get(demoSelectors.productNameSelector).eq(0).should('have.text', dropdownOptionSelectors.backpackTextName)
-    .click(); 
-    cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=4');
+    addtocart(
+      addToCartSelectors.backpackSelector,
+      demoSelectors.productNameSelector,
+      textMessage.zero,
+      textMessage.backpackTextName,
+      textMessage.backpackLink,
+      demoSelectors.productDescribeSelector,
+      textMessage.backpackTextDescribe,
+      demoSelectors.productPriceSelector,
+      textMessage.backpackPrice,
+      addToCartSelectors.addToCartButton,
+      addToCartSelectors.backToProduct,
+      textMessage.inventoryLink,
+    )
 
-    cy.get(demoSelectors.productDescribeSelector).should('contain', dropdownOptionSelectors.backpackTextDescribe);
-    cy.get(demoSelectors.productPriceSelector).should('contain', dropdownOptionSelectors.backpackPrice);
-    cy.get(addToCartSelectors.addToCartButton).should('be.visible')
-    .click();
-    cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
-    cy.url().should('include','/inventory.html');
+    addtocart(
+      addToCartSelectors.bikeLightSelector,
+      demoSelectors.productNameSelector,
+      textMessage.one,
+      textMessage.bikeLightTextName,
+      textMessage.bikeLightLink,
+      demoSelectors.productDescribeSelector,
+      textMessage.bikeLightTextDescribe,
+      demoSelectors.productPriceSelector,
+      textMessage.bikeLightPrice,
+      addToCartSelectors.addToCartButton,
+      addToCartSelectors.backToProduct,
+      textMessage.inventoryLink,
 
-    cy.get(addToCartSelectors.bikeLightSelector).should('be.visible');
-    cy.get(demoSelectors.productNameSelector).eq(1).should('have.text', dropdownOptionSelectors.bikeLightTextName)
-    .click(); 
-    
-    cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=0');
-    cy.get(demoSelectors.productDescribeSelector).should('contain', dropdownOptionSelectors.bikeLightTextDescribe);
-    cy.get(demoSelectors.productPriceSelector).should('contain', dropdownOptionSelectors.bikeLightPrice);
-    cy.get(addToCartSelectors.addToCartButton).should('be.visible')
-    .click();
-    cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
-    cy.url().should('include','/inventory.html');
+    )
 
-    cy.get(addToCartSelectors.boltTshirtSelector).should('be.visible');
-    cy.get(demoSelectors.productNameSelector).eq(2).should('have.text', dropdownOptionSelectors.boltTshirtTextName)
-    .click(); 
- 
-    cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=1');
-    cy.get(demoSelectors.productDescribeSelector).should('contain', dropdownOptionSelectors.boltTshirtTextDescribe);
-    cy.get(demoSelectors.productPriceSelector).should('contain', dropdownOptionSelectors.boltTshirtPrice);
-    cy.get(addToCartSelectors.addToCartButton).should('be.visible')
-    .click();
-    cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
-    cy.url().should('include','/inventory.html');
+    addtocart(
+      addToCartSelectors.boltTshirtSelector,
+      demoSelectors.productNameSelector,
+      textMessage.two,
+      textMessage.boltTshirtTextName,
+      textMessage.boltTshirtLink,
+      demoSelectors.productDescribeSelector,
+      textMessage.boltTshirtTextDescribe,
+      demoSelectors.productPriceSelector,
+      textMessage.boltTshirtPrice,
+      addToCartSelectors.addToCartButton,
+      addToCartSelectors.backToProduct,
+      textMessage.inventoryLink,
 
-    cy.get(addToCartSelectors.fleeceJacketSelector).should('be.visible');
-    cy.get(demoSelectors.productNameSelector).eq(3).should('have.text',dropdownOptionSelectors.fleeceJacketTextName)
-    .click();
-    cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=5');
-    cy.get(demoSelectors.productDescribeSelector).should('contain',dropdownOptionSelectors.fleeceJacketTextDescribe);
-    cy.get(demoSelectors.productPriceSelector).should('contain',dropdownOptionSelectors.fleecejacketPrice);
-    cy.get(addToCartSelectors.addToCartButton).should('be.visible')
-    .click();
-    cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
-    cy.url().should('include','/inventory.html');
+    )
+    addtocart(
+      addToCartSelectors.fleeceJacketSelector,
+      demoSelectors.productNameSelector,
+      textMessage.three,
+      textMessage.fleeceJacketTextName,
+      textMessage.fleeceJacketLink,
+      demoSelectors.productDescribeSelector,
+      textMessage.fleeceJacketTextDescribe,
+      demoSelectors.productPriceSelector,
+      textMessage.fleecejacketPrice,
+      addToCartSelectors.addToCartButton,
+      addToCartSelectors.backToProduct,
+      textMessage.inventoryLink,
+
+    )
+
 
     cy.get(addToCartSelectors.shoppingCartBadge).should('be.visible').and('contain', '4');
     cy.get(demoSelectors.addToCartSelector).click();
@@ -68,28 +92,28 @@ describe('Product page', () => {
     cy.get(addToCartSelectors.quantitySelector).should('have.text', 'QTY'); 
     cy.get(addToCartSelectors.descriptionSelector).should('have.text', 'Description');
 
-    cy.get(demoSelectors.productNameSelector).eq(0).should('contain', dropdownOptionSelectors.backpackTextName); 
-    cy.get(demoSelectors.productNameSelector).eq(2).should('contain', dropdownOptionSelectors.boltTshirtTextName); 
+    cy.get(demoSelectors.productNameSelector).eq(0).should('contain', textMessage.backpackTextName); 
+    cy.get(demoSelectors.productNameSelector).eq(2).should('contain', textMessage.boltTshirtTextName); 
 
   
-    cy.get(demoSelectors.productNameSelector).eq(0).should('have.text', dropdownOptionSelectors.backpackTextName)
+    cy.get(demoSelectors.productNameSelector).eq(0).should('have.text', textMessage.backpackTextName)
     .click(); 
-    cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=4');
+    cy.url().should('include',textMessage.backpackLink);
     cy.get(addToCartSelectors.removeButton).should('be.visible')
     .click();
     cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
-    cy.url().should('include','/inventory.html'); 
+    cy.url().should('include',textMessage.inventoryLink); 
     cy.get(addToCartSelectors.shoppingCartBadge).should('be.visible').and('contain', '3');
     cy.get(demoSelectors.addToCartSelector).click();
     cy.url().should('include','https://www.saucedemo.com/cart.html');
 
-    cy.get(demoSelectors.productNameSelector).eq(2).should('have.text', dropdownOptionSelectors.fleeceJacketTextName)
+    cy.get(demoSelectors.productNameSelector).eq(2).should('have.text', textMessage.fleeceJacketTextName)
     .click();
-    cy.url().should('include','https://www.saucedemo.com/inventory-item.html?id=5');
+    cy.url().should('include',textMessage.fleeceJacketLink);
     cy.get(addToCartSelectors.removeButton).should('be.visible')
     .click();
     cy.get(addToCartSelectors.backToProduct).should('be.visible').click();
-    cy.url().should('include','/inventory.html'); 
+    cy.url().should('include',textMessage.inventoryLink); 
     cy.get(addToCartSelectors.shoppingCartBadge).should('be.visible').and('contain', '2');
     cy.get(demoSelectors.addToCartSelector).click();
 
@@ -137,8 +161,8 @@ describe('Product page', () => {
      cy.get(addToCartSelectors.continueButton).click();
      cy.url().should('include','https://www.saucedemo.com/checkout-step-two.html');
      cy.get('.title').should('have.text', 'Checkout: Overview');
-     cy.get(demoSelectors.productNameSelector).eq(0).should('have.text', dropdownOptionSelectors.bikeLightTextName); 
-     cy.get(demoSelectors.productNameSelector).eq(1).should('have.text', dropdownOptionSelectors.boltTshirtTextName); 
+     cy.get(demoSelectors.productNameSelector).eq(0).should('have.text', textMessage.bikeLightTextName); 
+     cy.get(demoSelectors.productNameSelector).eq(1).should('have.text', textMessage.boltTshirtTextName); 
      cy.scrollTo('bottom');
      cy.get('.footer').should('be.visible');
      cy.get(addToCartSelectors.paymentInfoLevelSelector).should('have.text','Payment Information:');

@@ -1,6 +1,7 @@
 import{demoSelectors}from "../support/selectors/demoSelectors"
 import { addToCartSelectors } from "../support/selectors/addToCartSelectors";
-import { dropdownOptionSelectors } from "../support/selectors/dropdownOptionSelectors";
+import { textMessage } from "../support/textMessage";
+
 describe ('Login page', ()=>{
   it.skip('login page should be visible', ()=>{
 
@@ -74,7 +75,7 @@ describe ('Login page', ()=>{
   })
       // Valid login with standard user
   it.only('Valid login with standard user with valid password',()=>{
-    cy.login('standard_user','secret_sauce');
+      cy.login('standard_user','secret_sauce');
     //   cy.visit('https://www.saucedemo.com/');
     //   cy.url().should('eq', 'https://www.saucedemo.com/');
     //   cy.get(demoSelectors.userNameSelector).clear().type("standard_user");
@@ -91,16 +92,16 @@ describe ('Login page', ()=>{
       .and('be.visible');
       
       //Items should be visible
-      cy.get(demoSelectors.productNameSelector).eq(0).should('contain', dropdownOptionSelectors.backpackTextName); 
+      cy.get(demoSelectors.productNameSelector).eq(0).should('contain', textMessage.backpackTextName); 
       cy.get(addToCartSelectors.backpackSelector).should('be.visible');
-      cy.get(demoSelectors.productDescribeSelector).should('contain', dropdownOptionSelectors.backpackTextDescribe);
-      cy.get(demoSelectors.productPriceSelector).should('contain', dropdownOptionSelectors.backpackPrice);
+      cy.get(demoSelectors.productDescribeSelector).should('contain', textMessage.backpackTextDescribe);
+      cy.get(demoSelectors.productPriceSelector).should('contain', textMessage.backpackPrice);
       cy.get(demoSelectors.addtoCartBackpack).should('be.visible');
 
-      cy.get(demoSelectors.productNameSelector).eq(3).should('have.text',dropdownOptionSelectors.fleeceJacketTextName);
+      cy.get(demoSelectors.productNameSelector).eq(3).should('have.text', textMessage.fleeceJacketTextName);
       cy.get(addToCartSelectors.fleeceJacketSelector).should('be.visible');
-      cy.get(demoSelectors.productDescribeSelector).should('contain',dropdownOptionSelectors.fleeceJacketTextDescribe);
-      cy.get(demoSelectors.productPriceSelector).should('contain',dropdownOptionSelectors.fleecejacketPrice);
+      cy.get(demoSelectors.productDescribeSelector).should('contain', textMessage.fleeceJacketTextDescribe);
+      cy.get(demoSelectors.productPriceSelector).should('contain', textMessage.fleecejacketPrice);
       cy.get(demoSelectors.addtoCartFleeceJacket ).should('be.visible');
 
       //scroll down
