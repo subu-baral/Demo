@@ -42,6 +42,7 @@ export const textMessage= {
  
     inventoryLink : '/inventory.html',
     noMatchErrorMessage : 'Epic sadface: Username and password do not match any user in this service' ,
+    firstNameRequired : 'Error: First Name is required',
 
     one: 1,
     zero : 0,
@@ -50,5 +51,22 @@ export const textMessage= {
     four : 4,
     five : 5,
 
+    cartLink : '/cart.html',
+    checkoutStepOneLink : 'https://www.saucedemo.com/checkout-step-one.html',
+    checkoutStepTwoLink : 'https://www.saucedemo.com/checkout-step-two.html',
+    checkoutCompleteLink : 'https://www.saucedemo.com/checkout-complete.html',
+    checkoutOverview : 'Checkout: Overview',
+    paymentInfo : 'Payment Information:',
+    paymentValue : 'SauceCard #31337',
+    shippingInfo : 'Shipping Information:',
+    shippingValue : 'Free Pony Express Delivery!',
+    totalInfo : 'Price Total' ,
+    subTotalInfo : 'Item total: $25.98',
+    taxLabel : 'Tax: $2.08',
+    totalLabel : 'Total: $28.06',
+    checkoutCompleteText : 'Checkout: Complete!',
+    completeHeaderText : 'Thank you for your order!',
+    completeOrderMessage : 'Your order has been dispatched, and will arrive just as fast as the pony can get there!',
+    checkoutInfoText : 'Checkout: Your Information',
  
  }

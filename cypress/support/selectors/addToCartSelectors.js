@@ -37,6 +37,10 @@ export const addToCartSelectors = {
     totalLabelSelector : 'div[data-test="total-label"]',
 
     finishButton : '#finish',
+    errorMessageContainer : 'div[class="error-message-container error"]' ,
+    completeHeader : 'h2[data-test="complete-header"]',
+    completeText : 'div[data-test="complete-text"]' ,
+    
     
 
 
