@@ -1,4 +1,5 @@
 export const demoSelectors = { 
+
     // login placeholder Selectors
     userNamePlaceholderSelector: 'input[name="user-name"]',
     passwordPlaceholderSelector: 'input[name="password"]',
@@ -30,5 +31,6 @@ export const demoSelectors = {
 
     //logout Selector
     logOutSelector : '#logout_sidebar_link'
+
 
 }
